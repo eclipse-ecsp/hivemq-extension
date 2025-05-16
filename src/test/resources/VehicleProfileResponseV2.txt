@@ -1,0 +1,21 @@
+{
+	"code": "vp-200",
+	"message": "Success",
+	"data": {
+		"vehicleId": "5A8HR44H08R828625",
+		"ecus": {
+			"tcu": {
+				"ecuType": "VP4",
+				"serialNo": "44711284",
+				"clientId": "HUPBQF2WX35981"
+			},
+			"hu": {
+				"ecuType": "VP4",
+				"serialNo": "44711284",
+				"clientId": "HUPBQF2QR33990"
+			}
+		},
+		"deviceType": "tcu",
+		"connectedPlatform":"SSDP"
+	}
+}
