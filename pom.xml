@@ -97,10 +97,9 @@
 		<hivemq-maven-plugin.version>4.0.3</hivemq-maven-plugin.version>
 		<jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
 		<maven-deploy-plugin.version>3.0.0</maven-deploy-plugin.version>
-		<maven-shade-plugin.version>3.3.0</maven-shade-plugin.version>
+		<maven-shade-plugin.version>2.1</maven-shade-plugin.version>
 		<log4j-version>2.20.0</log4j-version>
 		<snake-yaml.version>2.0</snake-yaml.version>
-		<log4j2-cachefile-transformer.version>2.18.0</log4j2-cachefile-transformer.version>
 		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
 		<java.version>17</java.version>
 		<springboot.version>3.2.3</springboot.version>
@@ -663,29 +662,9 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
-							<artifactSet>
-								<excludes>
-									<exclude>com.hivemq:hivemq-extension-sdk</exclude>
-									<exclude>com.google.inject:*</exclude>
-									<exclude>com.google.guava:*</exclude>
-									<exclude>org.slf4j:*</exclude>
-									<exclude>ch.qos.logback:*</exclude>
-								</excludes>
-							</artifactSet>
-							<filters>
-								<filter>
-									<artifact>*.*</artifact>
-									<excludes>
-										<exclude>META-INF/*.SF</exclude>
-										<exclude>META-INF/*.DSA</exclude>
-										<exclude>META-INF/*.RSA</exclude>
-									</excludes>
-								</filter>
-							</filters>
-							<transformers>
-								<transformer
-									implementation="io.github.edwgiz.log4j.maven.plugins.shade.transformer.Log4j2PluginCacheFileTransformer" />
-							</transformers>
+							<shadedArtifactAttached>true</shadedArtifactAttached>
+							<minimizeJar>false</minimizeJar>
+							<artifactSet/>
 						</configuration>
 					</execution>
 				</executions>
