@@ -53,6 +53,5 @@ jobs:
     uses: eclipse-ecsp/.github/.github/workflows/workflow-docker-push.yml@main
     secrets: inherit
     with:
-      context_path: ./hivemq-extension
       image_tag: ${{ needs.extract_version.outputs.release_version }}
       maven_args: 'clean package -P release'
