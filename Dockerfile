@@ -3,12 +3,12 @@ FROM tomcat:10.1.40-jdk17
 RUN mkdir /extensions /logback-ext
 RUN apk update && apk add unzip
 
-ARG ARTIFACT_ID
-ARG ARTIFACT_VERSION
-ENV ARTIFACT_ID ${ARTIFACT_ID}
-ENV ARTIFACT_VERSION ${ARTIFACT_VERSION}
+ARG API_WAR_NAME
+ARG PROJECT_JAR_VERSION
+ENV API_WAR_NAME ${API_WAR_NAME}
+ENV PROJECT_JAR_VERSION ${PROJECT_JAR_VERSION}
 
-COPY target/${ARTIFACT_ID}-${ARTIFACT_VERSION}-distribution.zip /extensions/
+COPY target/${API_WAR_NAME}-${PROJECT_JAR_VERSION}-distribution.zip /extensions/
 ADD logback-ext.zip /logback-ext/
 
 RUN unzip /extensions/*.zip -d /extensions/

@@ -86,7 +86,7 @@ public class StubManagedExtensionExecutorService implements ManagedExtensionExec
 
     @Override
     public void execute(Runnable command) {
-
+        //do nothing
     }
 
     @Override

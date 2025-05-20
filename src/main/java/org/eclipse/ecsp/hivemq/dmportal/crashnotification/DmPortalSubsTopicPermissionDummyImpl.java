@@ -58,6 +58,7 @@ public class DmPortalSubsTopicPermissionDummyImpl implements ClientTopicPermissi
         */
     @Override
     public void init(Properties prop) {
+        // do nothing
     }
 
 }
