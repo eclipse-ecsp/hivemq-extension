@@ -53,12 +53,22 @@ public class AuthenticationFactory {
 
     }
 
+    
     /**
-     * This returns object of required authenticator class.
+     * Returns a singleton instance of {@link IgniteAuthenticationCallback} by loading the implementation class
+     * specified in the application properties. The implementation class is retrieved from the application context
+     * using its bean name (converted to lower case).
      *
-     * @param applicationContext - application context
-     * @return instance of authenticator
-     * @throws Exception - Throws exception when not able to create object
+     * <p>This method is thread-safe and ensures that only one instance of the authentication callback is created.
+     * If the instance already exists, it is returned immediately. Otherwise, the method attempts to load the class
+     * specified by the {@code HIVEMQ_PLUGIN_AUTHENTICATION_IMPL_CLASS} property, retrieves its bean from the
+     * provided {@link AnnotationConfigApplicationContext}, and assigns it as the singleton instance.</p>
+     *
+     * @param applicationContext the Spring application context used to retrieve the authentication callback bean
+     * @return the singleton instance of {@link IgniteAuthenticationCallback}
+     * @throws ClassNotFoundException if the implementation class name is not specified or cannot 
+     *      be found on the classpath
+     * @throws ClassLoaderNotFoundException if the class loader is null
      */
     public static synchronized IgniteAuthenticationCallback getInstance(
             AnnotationConfigApplicationContext applicationContext)

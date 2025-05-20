@@ -53,8 +53,6 @@ public class DeviceSubscription {
     private Optional<String> deviceType = Optional.empty();
     // counter for duplicate connection with with same Id
     private int connectionsInfoCounter = AuthConstants.SINGLE_CONNECTION;
-    @Setter
-    private boolean isSsdpVehicle;
 
     public DeviceSubscription(String vehicleId) {
         this.vehicleId = vehicleId;

@@ -116,7 +116,6 @@ public final class AuthConstants {
     public static final String CONF_SERVICEID_SERVICE_MAPPING = "mqtt.topic.service.mapping";
     public static final String STATIC_CRED_ENABLED = "static.password.enabled";
     public static final String STATIC_CRED = "mqtt.user.password";
-    public static final String VAULT_ENABLED = "vault.enabled";
     public static final String CERT_BEGIN = "-----BEGIN CERTIFICATE-----\n";
     public static final String END_CERT = "-----END CERTIFICATE-----";
     public static final String CERTIFICATE_TYPE = "X.509";

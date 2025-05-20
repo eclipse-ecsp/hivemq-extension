@@ -43,12 +43,11 @@ import java.util.Properties;
 
 /**
  * PropertyLoader can load the properties from a default file or from a given
- * properties file or from vault.
+ * properties file.
  */
 public class PropertiesLoadTest {
 
     private static final String TOPIC_MAPPER_CLASS = "org.eclipse.ecsp.hivemq.routing.TopicMapperIgniteServiceBased";
-    private static final String SIMULATOR_TOPIC_FORMATTER = "org.eclipse.ecsp.hivemq.simulator.SimulatorTopicFormatter";
     private static final String NEW_TOPIC_FORMATTER = "org.eclipse.ecsp.hivemq.routing.NewTopicMapper";
 
     /**
@@ -61,12 +60,7 @@ public class PropertiesLoadTest {
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream("src/test/resources/hivemq-plugin-base.properties"));
-            boolean ssdpSimulator = Boolean.parseBoolean(properties.getProperty("ssdp.simulator"));
-            if (!ssdpSimulator) {
-                Assert.assertEquals(TOPIC_MAPPER_CLASS, properties.getProperty("topic.mapper.impl.class"));
-            } else {
-                Assert.assertEquals(SIMULATOR_TOPIC_FORMATTER, properties.getProperty("topic.mapper.impl.class"));
-            }
+            Assert.assertEquals(TOPIC_MAPPER_CLASS, properties.getProperty("topic.mapper.impl.class"));
             properties.load(new FileInputStream("src/test/resources/hivemq-plugin-harman-dev.properties"));
             Assert.assertEquals(NEW_TOPIC_FORMATTER, properties.getProperty("topic.mapper.impl.class"));
         } catch (FileNotFoundException e) {
@@ -84,12 +78,7 @@ public class PropertiesLoadTest {
     public void testLoadPropertyLoader() {
 
         PropertyLoader.getProperties("src/test/resources/hivemq-plugin-base.properties");
-        boolean ssdpSimulator = Boolean.parseBoolean(PropertyLoader.getValue("ssdp.simulator"));
-        if (!ssdpSimulator) {
-            Assert.assertEquals(TOPIC_MAPPER_CLASS, PropertyLoader.getValue("topic.mapper.impl.class"));
-        } else {
-            Assert.assertEquals(SIMULATOR_TOPIC_FORMATTER, PropertyLoader.getValue("topic.mapper.impl.class"));
-        }
+        Assert.assertEquals(TOPIC_MAPPER_CLASS, PropertyLoader.getValue("topic.mapper.impl.class"));
 
         PropertyLoader.getProperties("src/test/resources/hivemq-plugin-harman-dev.properties");
         Assert.assertEquals(NEW_TOPIC_FORMATTER, PropertyLoader.getValue("topic.mapper.impl.class"));
@@ -103,12 +92,7 @@ public class PropertiesLoadTest {
     public void testReLoadPropertyLoader() {
         File filePath = new File("src/test/resources/hivemq-plugin-base.properties");
         PropertyLoader.reload(filePath);
-        boolean ssdpSimulator = Boolean.parseBoolean(PropertyLoader.getValue("ssdp.simulator"));
-        if (!ssdpSimulator) {
-            Assert.assertEquals(TOPIC_MAPPER_CLASS, PropertyLoader.getValue("topic.mapper.impl.class"));
-        } else {
-            Assert.assertEquals(SIMULATOR_TOPIC_FORMATTER, PropertyLoader.getValue("topic.mapper.impl.class"));
-        }
+        Assert.assertEquals(TOPIC_MAPPER_CLASS, PropertyLoader.getValue("topic.mapper.impl.class"));
     }
 
     /**
@@ -131,13 +115,7 @@ public class PropertiesLoadTest {
     @Test
     public void testGetValueWhenDefaultValueNotUsed() throws IOException {
         PropertyLoader.getProperties("src/test/resources/hivemq-plugin-base.properties");
-        boolean ssdpSimulator = Boolean.parseBoolean(PropertyLoader.getValue("ssdp.simulator"));
-        if (!ssdpSimulator) {
-            Assert.assertEquals(TOPIC_MAPPER_CLASS, PropertyLoader.getValue("topic.mapper.impl.class", "defaultValue"));
-        } else {
-            Assert.assertEquals(SIMULATOR_TOPIC_FORMATTER,
-                    PropertyLoader.getValue("topic.mapper.impl.class", "defaultValue"));
-        }
+        Assert.assertEquals(TOPIC_MAPPER_CLASS, PropertyLoader.getValue("topic.mapper.impl.class", "defaultValue"));
     }
 
     /**

@@ -54,6 +54,7 @@ import org.eclipse.ecsp.hivemq.base.VehicleProfileDataExtraction;
 import org.eclipse.ecsp.hivemq.callbacks.AbstractSubscribeInboundInterceptor;
 import org.eclipse.ecsp.hivemq.callbacks.ConnectInterceptor;
 import org.eclipse.ecsp.hivemq.callbacks.HiveStopCallback;
+import org.eclipse.ecsp.hivemq.callbacks.OnSubscribeIntercept;
 import org.eclipse.ecsp.hivemq.callbacks.SubscriptionStatusHandler;
 import org.eclipse.ecsp.hivemq.kafka.ApplicationConstants;
 import org.eclipse.ecsp.hivemq.sink.HivemqSinkService;
@@ -124,37 +125,28 @@ public class PluginMainClass implements ExtensionMain {
     /**
      * Initializes the plugin by setting up various components and dependencies.
      * This method performs the following tasks:
-     * 1. Retrieves the value of the SSDP_SIMULATOR property and determines if the plugin is running in simulator mode.
-     * 2. Creates an instance of the AnnotationConfigApplicationContext using the configured plugin config class.
-     * 3. Retrieves the authentication implementation from the AuthenticationFactory.
-     * 4. Initializes the BaseAuthenticatorProvider with the authentication implementation.
-     * 5. Determines the class name for the subscribe interceptor based on the simulator mode.
-     * 6. Retrieves the subscribe interceptor bean from the application context.
-     * 7. Initializes the SubscribeAuthProvider with the subscribe interceptor.
-     * 8. Retrieves the client lifecycle event listener implementation.
-     * 9. Retrieves the HiveStopCallback bean from the application context.
-     * 10. Retrieves the VehicleProfileDataExtraction implementation and sets it in the VehicleProfileApiClient.
-     * 11. Retrieves the ConnectInterceptor bean from the application context.
-     * 12. Initializes the RedissonClient and sets it in the IgniteCacheRedisImpl if Redis is enabled.
-     * 13. Retrieves the authorization implementation from the AuthorizationFactory.
+     * 1. Creates an instance of the AnnotationConfigApplicationContext using the configured plugin config class.
+     * 2. Retrieves the authentication implementation from the AuthenticationFactory.
+     * 3. Initializes the BaseAuthenticatorProvider with the authentication implementation.
+     * 4. Retrieves the subscribe interceptor bean from the application context.
+     * 5. Initializes the SubscribeAuthProvider with the subscribe interceptor.
+     * 6. Retrieves the client lifecycle event listener implementation.
+     * 7. Retrieves the HiveStopCallback bean from the application context.
+     * 8. Retrieves the VehicleProfileDataExtraction implementation and sets it in the VehicleProfileApiClient.
+     * 9. Retrieves the ConnectInterceptor bean from the application context.
+     * 10. Initializes the RedissonClient and sets it in the IgniteCacheRedisImpl if Redis is enabled.
+     * 11. Retrieves the authorization implementation from the AuthorizationFactory.
      *
      * @throws ClassNotFoundException if the plugin config class or subscribe interceptor class cannot be found.
      */
     private void init() throws ClassNotFoundException {
-        boolean isSimulator = Boolean
-                .parseBoolean(PropertyLoader.getValue(ApplicationConstants.SSDP_SIMULATOR, FALSE));
         applicationContext = new AnnotationConfigApplicationContext(
                 Class.forName(PropertyLoader.getValue(ApplicationConstants.HIVEMQ_PLUGIN_CONFIG_CLASS)));
         IgniteAuthenticationCallback authImplementation = AuthenticationFactory.getInstance(applicationContext);
         baseAuthenticatorProvider = new BaseAuthenticatorProvider(authImplementation);
 
-        String subscribeClass = "org.eclipse.ecsp.hivemq.callbacks.OnSubscribeIntercept";
-        if (isSimulator) {
-            subscribeClass = "org.eclipse.ecsp.hivemq.simulator.SimulatorOnSubscribeIntercept";
-        }
-        AbstractSubscribeInboundInterceptor subscribeInboundInterceptor 
-            = (AbstractSubscribeInboundInterceptor) applicationContext.getBean(getClass().getClassLoader()
-                    .loadClass(subscribeClass));
+        AbstractSubscribeInboundInterceptor subscribeInboundInterceptor = 
+                applicationContext.getBean(OnSubscribeIntercept.class);
         subscriptionAuthorizer = new SubscribeAuthProvider(subscribeInboundInterceptor);
 
         clientLifeCycleEvents = (ClientLifecycleEventListener) getInstance(

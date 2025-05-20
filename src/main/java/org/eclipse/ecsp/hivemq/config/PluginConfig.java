@@ -31,7 +31,6 @@
 package org.eclipse.ecsp.hivemq.config;
 
 import com.codahale.metrics.MetricRegistry;
-import com.hivemq.extension.sdk.api.interceptor.unsubscribe.UnsubscribeInboundInterceptor;
 import org.eclipse.ecsp.hivemq.auth.authentication.CertificateAuthentication;
 import org.eclipse.ecsp.hivemq.auth.authentication.JwtAuthentication;
 import org.eclipse.ecsp.hivemq.auth.authentication.UsernamePasswordAuthentication;
@@ -53,17 +52,7 @@ import org.eclipse.ecsp.hivemq.callbacks.PubackReceived;
 import org.eclipse.ecsp.hivemq.callbacks.PubackSend;
 import org.eclipse.ecsp.hivemq.callbacks.SubscriptionStatusHandler;
 import org.eclipse.ecsp.hivemq.callbacks.UnsubscribeInboundIntercept;
-import org.eclipse.ecsp.hivemq.simulator.SimulatorAbstractAuthentication;
-import org.eclipse.ecsp.hivemq.simulator.SimulatorAbstractAuthorization;
-import org.eclipse.ecsp.hivemq.simulator.SimulatorAuthorizer;
-import org.eclipse.ecsp.hivemq.simulator.SimulatorCertificateAuthentication;
-import org.eclipse.ecsp.hivemq.simulator.SimulatorClientLifeCycleEvents;
-import org.eclipse.ecsp.hivemq.simulator.SimulatorJwtAuthentication;
-import org.eclipse.ecsp.hivemq.simulator.SimulatorOnSubscribeIntercept;
-import org.eclipse.ecsp.hivemq.simulator.SimulatorUnsubscribeInboundIntercept;
-import org.eclipse.ecsp.hivemq.simulator.SimulatorUsernamePasswordAuthentication;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -276,111 +265,5 @@ public class PluginConfig {
     @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public UnsubscribeInboundIntercept unsubscribeInboundIntercept() {
         return new UnsubscribeInboundIntercept();
-    }
-
-    /**
-        * Creates a new instance of the SimulatorClientLifeCycleEvents class.
-        * This bean is conditionally created based on the value of the "ssdp.simulator" property.
-        * If the property value is "true", an instance of SimulatorClientLifeCycleEvents is returned.
-        * Otherwise, this bean is not created.
-        *
-        * @return The SimulatorClientLifeCycleEvents instance.
-        */
-    @Bean
-    @ConditionalOnProperty(name = "ssdp.simulator", havingValue = "true")
-    public SimulatorClientLifeCycleEvents simulatorClientLifeCycleEvents() {
-        return new SimulatorClientLifeCycleEvents();
-    }
-
-    /**
-     * Creates and configures a SimulatorAbstractAuthentication bean for JWT authentication.
-     * This bean is conditionally created based on the value of the "ssdp.simulator" property.
-     * If the property is set to "true", an instance of SimulatorJwtAuthentication is returned.
-     *
-     * @return The configured SimulatorAbstractAuthentication bean for JWT authentication.
-     * @throws NoSuchAlgorithmException If the algorithm used for JWT authentication is not available.
-     * @throws InvalidKeySpecException If the key used for JWT authentication is invalid.
-     * @throws IOException If an I/O error occurs while configuring the bean.
-     */
-    @Bean("simulatorjwtauthentication")
-    @ConditionalOnProperty(name = "ssdp.simulator", havingValue = "true")
-    public SimulatorAbstractAuthentication simulatorJwtAuthentication()
-            throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
-        return new SimulatorJwtAuthentication();
-    }
-
-    /**
-     * Creates a bean for the simulator certificate authentication.
-     * This bean is conditionally created based on the value of the "ssdp.simulator" property.
-     * If the property is set to "true", an instance of SimulatorCertificateAuthentication is returned.
-     *
-     * @return the SimulatorAbstractAuthentication bean for simulator certificate authentication
-     * @throws NoSuchAlgorithmException if the algorithm used for certificate authentication is not available
-     * @throws InvalidKeySpecException if the key specification used for certificate authentication is invalid
-     * @throws IOException if an I/O error occurs while creating the SimulatorCertificateAuthentication instance
-     */
-    @Bean("simulatorcertificateauthentication")
-    @ConditionalOnProperty(name = "ssdp.simulator", havingValue = "true")
-    public SimulatorAbstractAuthentication simulatorCertificateAuthentication() 
-            throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
-        return new SimulatorCertificateAuthentication();
-    }
-
-    /**
-     * Creates and returns an instance of the {@link SimulatorAbstractAuthentication} class
-     * for simulator username and password authentication.
-     * This bean is conditionally created based on the value of the property "ssdp.simulator".
-     * If the value is set to "true", an instance of {@link SimulatorUsernamePasswordAuthentication}
-     * is returned. Otherwise, this bean is not created.
-     *
-     * @return An instance of {@link SimulatorAbstractAuthentication} for simulator username 
-     *      and password authentication.
-     */
-    @Bean("simulatorusernamepasswordauthentication")
-    @ConditionalOnProperty(name = "ssdp.simulator", havingValue = "true")
-    public SimulatorAbstractAuthentication simulatorUsernamePasswordAuthentication() {
-        return new SimulatorUsernamePasswordAuthentication();
-    }
-
-    /**
-     * Creates and returns an instance of the {@link SimulatorOnSubscribeIntercept} class.
-     * This method is annotated with {@link Bean} and {@link ConditionalOnProperty} annotations,
-     * which ensures that this bean is only created if the "ssdp.simulator" property is set to "true".
-     *
-     * @return An instance of the {@link SimulatorOnSubscribeIntercept} class.
-     */
-    @Bean
-    @ConditionalOnProperty(name = "ssdp.simulator", havingValue = "true")
-    public AbstractSubscribeInboundInterceptor simulatorOnSubscribeIntercept() {
-        return new SimulatorOnSubscribeIntercept();
-    }
-
-    /**
-     * Creates and returns a new instance of the UnsubscribeInboundInterceptor for the simulator.
-     * This interceptor is conditionally created based on the value of the "ssdp.simulator" property.
-     * If the property is set to "true", the interceptor is created; otherwise, it is not created.
-     * The created interceptor is set to have a prototype scope.
-     *
-     * @return The UnsubscribeInboundInterceptor for the simulator.
-     */
-    @Bean("simulatorunsubscribeinboundintercept")
-    @ConditionalOnProperty(name = "ssdp.simulator", havingValue = "true")
-    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public UnsubscribeInboundInterceptor simulatorUnsubscribeInboundIntercept() {
-        return new SimulatorUnsubscribeInboundIntercept();
-    }
-
-    /**
-     * Creates a bean named "simulatorauthorizer" if the property "ssdp.simulator" is set to true.
-     * This bean returns an instance of the SimulatorAuthorizer class, which is a subclass 
-     * of SimulatorAbstractAuthorization.
-     * The SimulatorAuthorizer class is responsible for authorizing simulator requests.
-     *
-     * @return An instance of the SimulatorAuthorizer class.
-     */
-    @Bean("simulatorauthorizer")
-    @ConditionalOnProperty(name = "ssdp.simulator", havingValue = "true")
-    public SimulatorAbstractAuthorization simulatorauthorizer() {
-        return new SimulatorAuthorizer();
     }
 }

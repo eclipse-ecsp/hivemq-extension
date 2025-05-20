@@ -70,17 +70,19 @@ public class JwtAuthentication extends UsernamePasswordAuthentication {
     private String jwtPublicKeyPath;
     private boolean jwtEnabled;
 
+    
     /**
-     * This constructor checks if jwt authentication is enabled then load jwt public
-     * key from property map.
+     * Constructs a new {@code JwtAuthentication} instance.
      *
-     * @throws IOException              File not available on given path
-     * @throws InvalidKeySpecException  If wrong algorithm is passed in
-     *                                  KeyFactory.getInstance
-     * @throws NoSuchAlgorithmException If invalid key is provided to generatePublic
-     *                                  method
-     * @throws Exception                - if not able to read public key from
-     *                                  properties.
+     * <p>
+     * This constructor initializes JWT authentication by checking if JWT validation is enabled
+     * via configuration properties. If enabled, it attempts to load the public key from the
+     * configured path and initializes the JWT verifier.
+     * </p>
+     *
+     * @throws NoSuchAlgorithmException if the algorithm for key specification is not available.
+     * @throws InvalidKeySpecException if the public key specification is invalid.
+     * @throws IOException if an I/O error occurs while reading the public key.
      */
     public JwtAuthentication() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
         jwtEnabled = "true".equalsIgnoreCase(PropertyLoader.getValue(AuthConstants.JWT_VALIDATION_ENABLED));
@@ -237,12 +239,26 @@ public class JwtAuthentication extends UsernamePasswordAuthentication {
     }
 
     /**
-     * This method validates jwt scops available in token with list of pre
-     * configured scopes in hivemq properties.
+     * Validates whether any of the scopes present in the provided JWT claims set
+     * match the valid scopes defined in the configuration.
      *
-     * @param claimSet - jwt claimset
-     * @return true if token scope is valid
-     * @throws Exception - Throw exception if not able to load jwt public key
+     * <p>
+     * This method retrieves the list of valid scopes from the configuration and compares
+     * them with the scopes present in the incoming JWT. If at least one scope from the JWT
+     * matches a scope in the configuration, the method returns {@code true}; otherwise, it returns {@code false}.
+     * </p>
+     *
+     * <p>
+     * Informational logs are generated to indicate the scopes present in the configuration,
+     * the scopes received in the JWT, and any invalid scope attempts.
+     * </p>
+     *
+     * @param claimSet the {@link JWTClaimsSet} containing the claims from the JWT token
+     * @return {@code true} if at least one scope from the JWT is valid according to the configuration; 
+     *      {@code false} otherwise
+     * @throws NoSuchAlgorithmException if a required cryptographic algorithm is not available
+     * @throws InvalidKeySpecException if the key specification is invalid
+     * @throws IOException if an I/O error occurs while accessing the configuration
      */
     public boolean validateJwtScopes(JWTClaimsSet claimSet)
             throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {

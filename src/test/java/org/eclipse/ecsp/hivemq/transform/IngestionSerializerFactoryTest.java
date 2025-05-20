@@ -66,7 +66,7 @@ public class IngestionSerializerFactoryTest {
      */
     @Test
     public void testGetInstance() {
-        prop.put("ingestion.serializer.impl", "org.eclipse.ecsp.serializer.IngestionSerializerFSTImpl");
+        prop.put("ingestion.serializer.impl", "org.eclipse.ecsp.serializer.IngestionSerializerFstImpl");
         IngestionSerializer mapper = IngestionSerializerFactory.getInstance();
         Assert.assertTrue(mapper instanceof IngestionSerializerFstImpl);
         prop.remove("ingestion.serializer.impl");

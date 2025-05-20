@@ -30,6 +30,11 @@
 			<name>Dileep Hemachandran</name>
 			<email>dileep.hemachandran@harman.com</email>
 		</developer>
+		<developer>
+			<id>akshaymathur-harman</id>
+			<name>Akshay Mathur</name>
+			<email>akshay.mathur@harman.com</email>
+		</developer>
 	</developers>
 
 	<issueManagement>
@@ -46,9 +51,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<time_stamp>${maven.build.timestamp}</time_stamp>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<kafka.version>3.6.2</kafka.version>
+		<kafka.version>3.7.2</kafka.version>
 		<embedded.mongodb>2.1.1</embedded.mongodb>
-		<!--  sonar properties -->
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 		<sonar.jacoco.reportPath>
 			${project.build.directory}/coverage-reports/jacoco-ut.exec</sonar.jacoco.reportPath>
@@ -56,17 +60,15 @@
 		<jacoco.ut.execution.data.file>
 			${project.build.directory}/coverage-reports/jacoco-ut.exec
         </jacoco.ut.execution.data.file>
-		<!--  sonar properties -->
-		<!--  ignite library version -->
 		<entities-version>1.1.1</entities-version>
 		<utils-version>1.1.1</utils-version>
 		<transformers-version>1.0.0</transformers-version>
 		<cache-version>1.0.0</cache-version>
 		<jaeger.version>1.8.1</jaeger.version>
-		<redisson.version>3.28.0</redisson.version>
+		<redisson.version>3.45.1</redisson.version>
 		<moquette.broker.version>0.17</moquette.broker.version>
-		<spring.version>6.1.4</spring.version>
-		<spring.security.version>6.2.4</spring.security.version>
+		<spring.version>6.1.18</spring.version>
+		<spring.security.version>6.3.8</spring.security.version>
 		<junit.version>4.13.2</junit.version>
 		<versions-maven-plugin.version>2.13.0</versions-maven-plugin.version>
 		<maven.surefire.version>2.18.1</maven.surefire.version>
@@ -83,28 +85,36 @@
 		<codahale-metrics-core-version>3.0.2</codahale-metrics-core-version>
 		<commons-compress.version>1.26.0</commons-compress.version>
 		<commons-lang3.version>3.12.0</commons-lang3.version>
-		<commons-io.version>2.11.0</commons-io.version>
+		<commons-io.version>2.17.0</commons-io.version>
 		<nimbus-jose-jwt.version>9.37.3</nimbus-jose-jwt.version>
 		<hazelcast.version>5.3.6</hazelcast.version>
 		<bcprov-jdk18on.version>1.78</bcprov-jdk18on.version>
 		<powermock.version>2.0.9</powermock.version>
 		<jedis.version>5.1.0</jedis.version>
 		<json-simple.version>1.1.1</json-simple.version>
-		<hivemq-extension-sdk.version>4.28.1</hivemq-extension-sdk.version>
+		<hivemq-extension-sdk.version>4.28.13</hivemq-extension-sdk.version>
 		<jquery.version>3.6.1</jquery.version>
 		<freemarker.version>2.3.31</freemarker.version>
 		<sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
 		<hivemq-maven-plugin.version>4.0.3</hivemq-maven-plugin.version>
 		<jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
 		<maven-deploy-plugin.version>3.0.0</maven-deploy-plugin.version>
-		<maven-shade-plugin.version>2.1</maven-shade-plugin.version>
+		<maven-shade-plugin.version>3.3.0</maven-shade-plugin.version>
 		<log4j-version>2.20.0</log4j-version>
 		<snake-yaml.version>2.0</snake-yaml.version>
+		<log4j2-cachefile-transformer.version>2.18.0</log4j2-cachefile-transformer.version>
 		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
 		<java.version>17</java.version>
-		<springboot.version>3.2.3</springboot.version>
+		<springboot.version>3.3.9</springboot.version>
 		<guava.version>33.0.0-jre</guava.version>
-		<checkstyle.config.location>${project.basedir}/checkStyle.xml</checkstyle.config.location>
+		<logback.version>1.5.18</logback.version>
+		<h2-mvstore.version>2.2.224</h2-mvstore.version>
+		<okio.version>3.9.0</okio.version>
+		<jetty-util.version>12.0.14</jetty-util.version>
+		<kotlin.version>1.8.21</kotlin.version>
+		<kubernetes.client-java.version>22.0.0</kubernetes.client-java.version>
+		<slf4j-log4j12.version>2.0.0</slf4j-log4j12.version>
+		<checkstyle.config.location>${project.basedir}/checkstyle.xml</checkstyle.config.location>
 		<sonar.java.checkstyle.reportPaths>
 			${project.build.directory}/checkstyle-result.xml</sonar.java.checkstyle.reportPaths>
 		<checkstyle.version>10.13.0</checkstyle.version>
@@ -124,11 +134,12 @@
 			**/InvalidClientIdFormatException.java,
 			**/InvalidSubscriptionException.java,
 			**/UserPayload.java,
+			**/DynamicRateLimitPropertyUpdater.java,
 			**/PluginConfig.java,
 			**/SubscribeAuthProvider.java,
 			**/VehicleProfileDataExtractionImpl.java,
-			**/SimulatorEventMetadataConstants.java,
-			**/AbstractAuthentication.java
+			**/AbstractAuthentication.java,
+			**/DynamicTopicConfigUpdater.java
 		</sonar.coverage.exclusions>
 		<maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
 		<license-tool-plugin.version>1.1.0</license-tool-plugin.version>
@@ -485,22 +496,22 @@
 		<dependency>
 			<groupId>io.kubernetes</groupId>
 			<artifactId>client-java</artifactId>
-			<version>18.0.0</version>
+			<version>${kubernetes.client-java.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>2.0.0</version>
+			<version>${slf4j-log4j12.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-stdlib</artifactId>
-			<version>1.8.21</version>
+			<version>${kotlin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-util</artifactId>
-			<version>12.0.8</version>
+			<version>${jetty-util.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -509,28 +520,25 @@
 		</dependency>
 		<!-- overriding to remove BD scan security issue -->
 		<dependency>
-			<groupId>com.squareup.okio</groupId>
-			<artifactId>okio</artifactId>
-			<version>3.9.0</version>
+		    <groupId>com.squareup.okio</groupId>
+		    <artifactId>okio</artifactId>
+		    <version>${okio.version}</version>
 		</dependency>
-		<!-- overriding to remove BD scan security issue -->
 		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.5.5</version>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-classic</artifactId>
+		    <version>${logback.version}</version>
 		</dependency>
-		<!-- overriding to remove BD scan security issue -->
 		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-			<version>1.5.5</version>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-core</artifactId>
+		    <version>${logback.version}</version>
 		</dependency>
-		<!-- overriding to remove BD scan security issue -->
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2-mvstore</artifactId>
-			<version>2.2.224</version>
-			<scope>test</scope>
+		    <groupId>com.h2database</groupId>
+		    <artifactId>h2-mvstore</artifactId>
+		    <version>${h2-mvstore.version}</version>
+		    <scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>
@@ -597,6 +605,7 @@
 						--add-opens java.base/java.io=ALL-UNNAMED
 						--add-opens java.base/java.lang.reflect=ALL-UNNAMED
 						--add-opens java.sql/java.sql=ALL-UNNAMED
+						--add-opens java.net.http/jdk.internal.net.http.common=ALL-UNNAMED
 					</argLine>
 				</configuration>
 			</plugin>
@@ -648,6 +657,8 @@
 						<arg>java.base/java.lang.reflect=ALL-UNNAMED</arg>
 						<arg>--add-opens</arg>
                         <arg>java.sql/java.sql=ALL-UNNAMED</arg>
+                        <arg>--add-opens</arg>
+                        <arg>java.net.http/jdk.internal.net.http.common=ALL-UNNAMED</arg>
 					</compilerArgs>
 				</configuration>
 			</plugin>
@@ -662,12 +673,39 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
-							<shadedArtifactAttached>true</shadedArtifactAttached>
-							<minimizeJar>false</minimizeJar>
-							<artifactSet/>
+							<artifactSet>
+								<excludes>
+									<exclude>com.hivemq:hivemq-extension-sdk</exclude>
+									<exclude>com.google.inject:*</exclude>
+									<exclude>com.google.guava:*</exclude>
+									<exclude>org.slf4j:*</exclude>
+									<exclude>ch.qos.logback:*</exclude>
+								</excludes>
+							</artifactSet>
+							<filters>
+								<filter>
+									<artifact>*.*</artifact>
+									<excludes>
+										<exclude>META-INF/*.SF</exclude>
+										<exclude>META-INF/*.DSA</exclude>
+										<exclude>META-INF/*.RSA</exclude>
+									</excludes>
+								</filter>
+							</filters>
+							<transformers>
+								<transformer
+									implementation="io.github.edwgiz.log4j.maven.plugins.shade.transformer.Log4j2PluginCacheFileTransformer" />
+							</transformers>
 						</configuration>
 					</execution>
 				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>io.github.edwgiz</groupId>
+						<artifactId>log4j-maven-shade-plugin-extensions</artifactId>
+						<version>${log4j2-cachefile-transformer.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -686,7 +724,7 @@
 					<includes>
 						<include>org/eclipse/ecsp/hivemq/**/*</include>
 						<include>org/eclipse/ecsp/analytics/stream/base/**/*</include>
-						<include>org/eclipse/ecsp/ignite/serializer/*</include>
+						<include>org/eclipse/ecsp/serializer/*</include>
 					</includes>
 				</configuration>
 				<executions>
@@ -828,14 +866,6 @@
 					<autoReleaseAfterClose>${autoReleaseAfterClose}</autoReleaseAfterClose>
 				</configuration>
 			</plugin>
-			<!-- maven sonar plugin..To send data to SonarQube you need to
-                run mvn sonar:sonar after the build -->
-			<plugin>
-				<groupId>org.sonarsource.scanner.maven</groupId>
-				<artifactId>sonar-maven-plugin</artifactId>
-				<version>${sonar-maven-plugin.version}</version>
-			</plugin>
-
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<executions>
@@ -896,6 +926,31 @@
 				<skipNexusStaging>false</skipNexusStaging>
 				<autoReleaseAfterClose>true</autoReleaseAfterClose>
 			</properties>
+		</profile>
+		<profile>
+			<id>RunWithHiveMQ</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.hivemq</groupId>
+						<artifactId>hivemq-maven-plugin</artifactId>
+						<version>${hivemq-maven-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>hivemq</id>
+								<phase>package</phase>
+								<goals>
+									<goal>hivemq</goal>
+								</goals>
+								<configuration>
+									<hiveMQDir>/opt/hivemq/</hiveMQDir>
+									<debugMode>SERVER</debugMode>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 </project>

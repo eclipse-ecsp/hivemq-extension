@@ -155,8 +155,6 @@ public final class ApplicationConstants {
     public static final String THREAD_DELAY = "disconnect.thread.delay";
     public static final String REPOPULATE_DEFAULT_PERMISSION = "repopulate.default.permission";
 
-    public static final String SSDP_SIMULATOR = "ssdp.simulator";
-    public static final String KAFKA_SINK_TOPIC_PRESENCE_MANAGER = "kafka.sink.topic.presence.manager";
     public static final String DEVICE_PLATFORM = "device.platform";
     
     public static final String MQTT_START_TIMER_JMX 

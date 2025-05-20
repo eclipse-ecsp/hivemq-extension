@@ -93,7 +93,7 @@ public class HivemqUtilsTest {
     public void setUp() throws Exception {
         initMocks(this);
         prop = PropertyLoader.getProperties("src/test/resources/hivemq-plugin-base.properties");
-        prop.put(AuthConstants.JWT_PUBLIC_KEY_PATH, "src/test/resources/wso_test_pk.txt");
+        prop.put(AuthConstants.JWT_PUBLIC_KEY_PATH, "src/test/resources/Test-public-key.txt");
 
     }
 
@@ -105,7 +105,7 @@ public class HivemqUtilsTest {
         */
     @Test
     public void test() throws Exception {
-        assertNotNull(HivemqUtils.readPublickey("src/test/resources/wso_test_pk.txt"));
+        assertNotNull(HivemqUtils.readPublickey("src/test/resources/Test-public-key.txt"));
     }
 
     /**

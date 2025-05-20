@@ -50,7 +50,6 @@ import org.eclipse.ecsp.hivemq.utils.TopicFormatter;
 import org.eclipse.ecsp.utils.logger.IgniteLogger;
 import org.eclipse.ecsp.utils.logger.IgniteLoggerFactory;
 import org.springframework.stereotype.Component;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -93,9 +92,15 @@ public class Authorizer extends AbstractAuthorization {
     private ClientTopicPermissions topicPermissionsFactory;
 
     /**
-     * This constructor loads all required properties on class loading time.
+     * Constructs an {@code Authorizer} instance and initializes authorization properties.
      *
-     * @throws IOException - throws exception when not able to load property file
+     * <p>
+     * This constructor loads and validates the authorization properties required for MQTT 
+     *      user and topic prefix configuration.
+     * It also initializes various caches and factories used for device subscription and topic permissions.
+     * </p>
+     *
+     * @throws EmptyOrNotAvailablePropertyException if the MQTT user prefix property is empty or not available.
      */
     public Authorizer() throws EmptyOrNotAvailablePropertyException {
         try {

@@ -52,10 +52,14 @@ public class CertificateBasedAuthorizer extends Authorizer {
     private static final IgniteLogger LOGGER = IgniteLoggerFactory.getLogger(CertificateBasedAuthorizer.class);
     protected String serviceCertificatePrefix;
 
+    
     /**
-     * This constructor loads all required properties on application startup.
+     * Constructs a new {@code CertificateBasedAuthorizer} instance.
      *
-     * @throws Exception - when class not able to load property file.
+     * <p>Initializes the {@code serviceCertificatePrefix} field by retrieving the list of property values
+     * associated with the {@code SERVICE_CERTIFICATE_COMMON_NAME_PREFIX} key from the authorization properties.
+     * If the list is not null and not empty, the first value is converted to uppercase and assigned to
+     * {@code serviceCertificatePrefix}. Otherwise, it is set to an empty string.
      */
     public CertificateBasedAuthorizer() {
         List<String> propertyValueList = authorizeProperties.get(AuthConstants.SERVICE_CERTIFICATE_COMMON_NAME_PREFIX);

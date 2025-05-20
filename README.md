@@ -1,7 +1,10 @@
 [<img src="./images/logo.png" width="300" height="150"/>](./images/logo.png)
 
-[![Build Status](https://github.com/eclipse-ecsp/hivemq-extension/actions/workflows/maven.yml/badge.svg)](https://github.com/eclipse-ecsp/hivemq-extension/actions/workflows/maven.yml)
-[![License](https://github.com/eclipse-ecsp/hivemq-extension/actions/workflows/license-compliance.yml/badge.svg)](https://github.com/eclipse-ecsp/hivemq-extension/actions/workflows/license-compliance.yml)
+[![Maven Build & Sonar Analysis](https://github.com/eclipse-ecsp/hivemq-extension/actions/workflows/maven-build.yml/badge.svg)](https://github.com/eclipse-ecsp/hivemq-extension/actions/workflows/maven-build.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=eclipse-ecsp_hivemq-extension&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=eclipse-ecsp_hivemq-extension
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=eclipse-ecsp_hivemq-extension&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=eclipse-ecsp_hivemq-extension)
+[![License Compliance](https://github.com/eclipse-ecsp/hivemq-extension/actions/workflows/licence-compliance.yaml/badge.svg)](https://github.com/eclipse-ecsp/hivemq-extension/actions/workflows/licence-compliance.yaml)
+[![Latest Release](https://img.shields.io/github/v/release/eclipse-ecsp/hivemq-extension?sort=semver)](https://github.com/eclipse-ecsp/hivemq-extension/releases)
 
 
 # HiveMQ Custom Extension

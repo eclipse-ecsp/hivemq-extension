@@ -96,7 +96,7 @@ public class JwtAuthenticationTest {
             PowerMockito.when(Services.clientService()).thenReturn(new StubClientService());
             PowerMockito.when(Services.metricRegistry()).thenReturn(registry);
             Properties props = PropertyLoader.getProperties("src/test/resources/hivemq-plugin-base.properties");
-            props.put(AuthConstants.JWT_PUBLIC_KEY_PATH, "src/test/resources/wso_test_pk.txt");
+            props.put(AuthConstants.JWT_PUBLIC_KEY_PATH, "src/test/resources/Test-public-key.txt");
             authentication = new JwtAuthentication();
         } catch (Exception e) {
             e.printStackTrace();
@@ -110,7 +110,7 @@ public class JwtAuthenticationTest {
     public void testJwtClientIdMatch() {
         String clientId = "deviceId";
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject("admin")
-                .issuer("https://${WSO2_PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
+                .issuer("https://${PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
                 .expirationTime(new Date(System.currentTimeMillis() + SIXTY_SECONDS))
                 .notBeforeTime(new Date(System.currentTimeMillis() - SIXTY_SECONDS))
                 .claim(AuthConstants.CLAIM_SET_AZP, "deviceId").build();
@@ -126,7 +126,7 @@ public class JwtAuthenticationTest {
     public void testJwtAudMatch() {
         String clientId = "deviceId";
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject("admin")
-                .issuer("https://${WSO2_PROXY_HOSTNAME}:443/oauth2/token").audience(clientId)
+                .issuer("https://${PROXY_HOSTNAME}:443/oauth2/token").audience(clientId)
                 .expirationTime(new Date(System.currentTimeMillis() + SIXTY_SECONDS))
                 .notBeforeTime(new Date(System.currentTimeMillis() - SIXTY_SECONDS)).build();
 
@@ -141,7 +141,7 @@ public class JwtAuthenticationTest {
         String clientId = "randomDeviceId";
         String userName = "user1";
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject(userName)
-                .issuer("https://${WSO2_PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
+                .issuer("https://${PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
                 .expirationTime(new Date(System.currentTimeMillis() + SIXTY_SECONDS))
                 .notBeforeTime(new Date(System.currentTimeMillis() - SIXTY_SECONDS))
                 .claim(AuthConstants.CLAIM_SET_AZP, "commonAzp").build();
@@ -158,7 +158,7 @@ public class JwtAuthenticationTest {
         String clientId = "deviceId";
 
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject("admin")
-                .issuer("https://${WSO2_PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
+                .issuer("https://${PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
                 .expirationTime(new Date(System.currentTimeMillis() + SIXTY_SECONDS))
                 .notBeforeTime(new Date(System.currentTimeMillis() - SIXTY_SECONDS))
                 .claim(AuthConstants.CLAIM_SET_AZP, "notMatchedId").build();
@@ -179,7 +179,7 @@ public class JwtAuthenticationTest {
         String clientId = "deviceId";
         String userName = "user1";
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject("wrongUserName")
-                .issuer("https://${WSO2_PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
+                .issuer("https://${PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
                 .expirationTime(new Date(System.currentTimeMillis() + SIXTY_SECONDS))
                 .notBeforeTime(new Date(System.currentTimeMillis() - SIXTY_SECONDS))
                 .claim(AuthConstants.CLAIM_SET_AZP, "wrongAzp").build();
@@ -201,7 +201,7 @@ public class JwtAuthenticationTest {
     public void testJwtTimeClaimsValidExpValidNbr() {
 
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject("admin")
-                .issuer("https://${WSO2_PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
+                .issuer("https://${PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
                 .expirationTime(new Date(System.currentTimeMillis() + SIXTY_SECONDS))
                 .notBeforeTime(new Date(System.currentTimeMillis() - SIXTY_SECONDS)).build();
 
@@ -219,7 +219,7 @@ public class JwtAuthenticationTest {
     public void testJwtTimeClaimsValidExpInvalidNbr() throws Exception {
 
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject("admin")
-                .issuer("https://${WSO2_PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
+                .issuer("https://${PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
                 .expirationTime(new Date(System.currentTimeMillis() + SIXTY_SECONDS))
                 .notBeforeTime(new Date(System.currentTimeMillis() + SIXTY_SECONDS)).build();
 
@@ -236,7 +236,7 @@ public class JwtAuthenticationTest {
     public void testJwtTimeClaimsWhenExpTimeNull() throws Exception {
 
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject("admin")
-                .issuer("https://${WSO2_PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
+                .issuer("https://${PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
                 .expirationTime(null).notBeforeTime(new Date(System.currentTimeMillis() + SIXTY_SECONDS)).build();
 
         logger.debug("claim set is: {} ", claimsSet);
@@ -252,7 +252,7 @@ public class JwtAuthenticationTest {
     public void testJwtTimeClaimsInvalidExpInvalidNbr() throws Exception {
 
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject("admin")
-                .issuer("https://${WSO2_PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
+                .issuer("https://${PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
                 .expirationTime(new Date(System.currentTimeMillis() - SIXTY_SECONDS))
                 .notBeforeTime(new Date(System.currentTimeMillis() + SIXTY_SECONDS)).build();
 
@@ -270,7 +270,7 @@ public class JwtAuthenticationTest {
     public void testJwtTimeClaimsInvalidExpValidNbr() throws Exception {
 
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject("admin")
-                .issuer("https://${WSO2_PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
+                .issuer("https://${PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
                 .expirationTime(new Date(System.currentTimeMillis() - SIXTY_SECONDS))
                 .notBeforeTime(new Date(System.currentTimeMillis() - SIXTY_SECONDS)).build();
 
@@ -291,7 +291,7 @@ public class JwtAuthenticationTest {
         scopes.add("Dongle");
 
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject("admin")
-                .issuer("https://${WSO2_PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
+                .issuer("https://${PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
                 .expirationTime(new Date(System.currentTimeMillis() + SIXTY_SECONDS))
                 .notBeforeTime(new Date(System.currentTimeMillis() - SIXTY_SECONDS)).claim("scopes", scopes).build();
 
@@ -311,7 +311,7 @@ public class JwtAuthenticationTest {
         scopes.add("Dongle");
 
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject("admin")
-                .issuer("https://${WSO2_PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
+                .issuer("https://${PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
                 .expirationTime(new Date(System.currentTimeMillis() + SIXTY_SECONDS))
                 .notBeforeTime(new Date(System.currentTimeMillis() - SIXTY_SECONDS)).claim("scopes", scopes).build();
 
@@ -332,7 +332,7 @@ public class JwtAuthenticationTest {
         scopes.add("PortalMqtt");
 
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject("admin")
-                .issuer("https://${WSO2_PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
+                .issuer("https://${PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
                 .expirationTime(new Date(System.currentTimeMillis() + SIXTY_SECONDS))
                 .notBeforeTime(new Date(System.currentTimeMillis() - SIXTY_SECONDS)).claim("scopes", scopes).build();
 
@@ -357,7 +357,7 @@ public class JwtAuthenticationTest {
         scopes.add("scope1");
 
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject("admin")
-                .issuer("https://${WSO2_PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
+                .issuer("https://${PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
                 .expirationTime(new Date(System.currentTimeMillis() + SIXTY_SECONDS))
                 .notBeforeTime(new Date(System.currentTimeMillis() - SIXTY_SECONDS)).claim("scopes", scopes).build();
 
@@ -375,7 +375,7 @@ public class JwtAuthenticationTest {
     public void testJwtTimeClaimsValidExpNoNbr() throws Exception {
 
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject("admin")
-                .issuer("https://${WSO2_PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
+                .issuer("https://${PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")
                 .expirationTime(new Date(System.currentTimeMillis() + SIXTY_SECONDS)).build();
 
         logger.debug("claim set is: {} ", claimsSet);

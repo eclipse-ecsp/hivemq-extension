@@ -53,12 +53,19 @@ public class AuthorizationFactory {
 
     }
 
+    
     /**
-     * This returns object of required authorization class.
+     * Returns the singleton instance of {@link IgniteAuthorizerExtension} using the provided
+     * {@link AnnotationConfigApplicationContext}. If the instance does not exist, it attempts to
+     * load the implementation class name from properties, retrieves the corresponding bean from
+     * the application context, and sets the application context on the instance.
      *
-     * @param applicationContext - application context
-     * @return instance of authorizer class
-     * @throws Exception - Throws exception when not able to create object
+     * <p>This method is thread-safe and ensures that only one instance is created.
+     *
+     * @param applicationContext the Spring application context used to load the bean and class loader
+     * @return the singleton instance of {@link IgniteAuthorizerExtension}
+     * @throws ClassNotFoundException if the implementation class name is not specified or not found on the classpath
+     * @throws ClassLoaderNotFoundException if the class loader is null
      */
     public static synchronized IgniteAuthorizerExtension getInstance(
             AnnotationConfigApplicationContext applicationContext)

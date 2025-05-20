@@ -28,7 +28,7 @@
 
  ********************************************************************************/
 
-package org.eclipse.ecsp.ignite.serializer;
+package org.eclipse.ecsp.hivemq.serializer;
 
 import org.eclipse.ecsp.entities.IgniteBlobEvent;
 import org.eclipse.ecsp.serializer.IngestionSerializer;

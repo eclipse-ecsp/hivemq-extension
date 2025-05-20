@@ -31,7 +31,6 @@
 package org.eclipse.ecsp.hivemq.routing;
 
 import org.eclipse.ecsp.hivemq.base.TopicMapper;
-import org.eclipse.ecsp.hivemq.simulator.SimulatorTopicFormatter;
 import org.eclipse.ecsp.hivemq.utils.PropertyLoader;
 import org.junit.Assert;
 import org.junit.Before;
@@ -58,19 +57,12 @@ public class TopicMapperFactoryTest {
     }
 
     /**
-        * Test case for the getInstance method of TopicMapperFactory.
-        * It verifies that the correct instance of TopicMapper is returned based on the value of the 
-        * "ssdp.simulator" property.
-        */
+     * Test case for the getInstance method of TopicMapperFactory.
+     */
     @Test
     public void testGetInstance() {
-        boolean ssdpSimulator = Boolean.parseBoolean(prop.getProperty("ssdp.simulator"));
         TopicMapper mapper = TopicMapperFactory.getInstance();
-        if (!ssdpSimulator) {
-            Assert.assertTrue(mapper instanceof TopicMapperIgniteServiceBased);
-        } else {
-            Assert.assertTrue(mapper instanceof SimulatorTopicFormatter);
-        }
+        Assert.assertTrue(mapper instanceof TopicMapperIgniteServiceBased);
     }
 
 }

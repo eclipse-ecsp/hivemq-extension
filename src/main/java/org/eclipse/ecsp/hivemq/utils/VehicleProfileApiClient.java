@@ -44,7 +44,6 @@ import org.eclipse.ecsp.hivemq.d2v.VehicleInfo;
 import org.eclipse.ecsp.hivemq.exceptions.VehicleProfileResponseNotFoundException;
 import org.eclipse.ecsp.utils.logger.IgniteLogger;
 import org.eclipse.ecsp.utils.logger.IgniteLoggerFactory;
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -68,14 +67,20 @@ public class VehicleProfileApiClient {
     private VehicleProfileApiClient() {
     }
 
+    
     /**
-     * Retrieves the vehicle information for the specified device ID.
+     * Retrieves the {@link VehicleInfo} for the specified device ID asynchronously.
      *
-     * @param deviceId       the ID of the device
-     * @param attributeStore the connection attribute store
-     * @return the vehicle information
+     * <p>
+     * This method fetches vehicle details for the given device ID and parses the response
+     * into a {@link VehicleInfo} object using the provided {@link ConnectionAttributeStore}.
+     * </p>
+     *
+     * @param deviceId the unique identifier of the device whose vehicle information is to be retrieved
+     * @param attributeStore the attribute store used for additional connection attributes during parsing
+     * @return a {@link CompletableFuture} that, when completed, contains the {@link VehicleInfo} 
+     *      for the specified device
      * @throws VehicleProfileResponseNotFoundException if the vehicle profile response is not found
-     * @throws IOException                            if an I/O error occurs
      */
     public static @NotNull CompletableFuture<VehicleInfo> getVehicleInfo(
             final String deviceId, final ConnectionAttributeStore attributeStore)
@@ -83,12 +88,16 @@ public class VehicleProfileApiClient {
         return getVehicleDetails(deviceId).thenApply(jsonNode -> parseVehicleInfo(jsonNode, deviceId, attributeStore));
     }
 
+    
     /**
-     * This method make http call to vehicle-profile api to get vehicle details.
+     * Retrieves vehicle details for the specified device ID by making an asynchronous HTTP request
+     * to the VehicleProfile service. The method constructs the request URL with the provided device ID
+     * as a query parameter, sends the request asynchronously, and parses the JSON response.
      *
-     * @param deviceId - device id for which vehicle details are required
-     * @return - vehicle details
-     * @throws Exception - throw exception if not able to make api call or not able to parse response
+     * @param deviceId the unique identifier of the device whose vehicle details are to be fetched
+     * @return a {@link CompletableFuture} containing the {@link JsonNode} representation of the vehicle details,
+     *         or {@code null} if the VehicleProfile URL is not configured
+     * @throws VehicleProfileResponseNotFoundException if the vehicle profile response is not found
      */
     public static @NotNull CompletableFuture<JsonNode> getVehicleDetails(final String deviceId)
             throws VehicleProfileResponseNotFoundException {

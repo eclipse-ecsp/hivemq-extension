@@ -31,7 +31,7 @@
 package org.eclipse.ecsp.hivemq.transform;
 
 import org.eclipse.ecsp.entities.IgniteBlobEvent;
-import org.eclipse.ecsp.ignite.serializer.JsonIngestionSerializerFstImpl;
+import org.eclipse.ecsp.hivemq.serializer.JsonIngestionSerializerFstImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
