@@ -9,8 +9,6 @@ ENV ARTIFACT_ID ${ARTIFACT_ID}
 ENV ARTIFACT_VERSION ${ARTIFACT_VERSION}
 
 COPY target/${ARTIFACT_ID}-${ARTIFACT_VERSION}-distribution.zip /extensions/
-ADD src/main/resources/hivemq-dns-cluster-discovery /extensions/hivemq-dns-cluster-discovery/
-ADD src/main/resources/hivemq-heartbeat-extension /extensions/hivemq-heartbeat-extension/
 ADD logback-ext.zip /logback-ext/
 
 RUN unzip /extensions/*.zip -d /extensions/

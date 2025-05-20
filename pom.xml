@@ -95,7 +95,7 @@
 		<hivemq-extension-sdk.version>4.28.13</hivemq-extension-sdk.version>
 		<jquery.version>3.6.1</jquery.version>
 		<freemarker.version>2.3.31</freemarker.version>
-		<sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
+		<sonar-maven-plugin.version>5.1.0.4751</sonar-maven-plugin.version>
 		<hivemq-maven-plugin.version>4.0.3</hivemq-maven-plugin.version>
 		<jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
 		<maven-deploy-plugin.version>3.0.0</maven-deploy-plugin.version>
