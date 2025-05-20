@@ -55,7 +55,7 @@ import java.util.Properties;
  */
 public class RedisPropLoader {
     private static final IgniteLogger LOGGER = IgniteLoggerFactory.getLogger(RedisPropLoader.class);
-    private String filePath = "ignite-cache.properties";
+    private String filePath = "cache-enabler.properties";
     @Getter
     private Map<String, String> propertiesMap = new HashMap<>();
 
@@ -81,7 +81,7 @@ public class RedisPropLoader {
                 propertiesMap.put(key, val);
             }
             LOGGER.debug("List of Key and its Values Map {} ", propertiesMap.toString());
-            LOGGER.info("ignite-cache.properties file successfully loaded..");
+            LOGGER.info("cache-enabler.properties file successfully loaded..");
         } catch (FileNotFoundException e) {
             LOGGER.error("File not found exception from path: " + filePath, e);
         } catch (IOException e) {
