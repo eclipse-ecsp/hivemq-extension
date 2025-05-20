@@ -607,6 +607,7 @@
 						--add-opens java.sql/java.sql=ALL-UNNAMED
 						--add-opens java.net.http/jdk.internal.net.http.common=ALL-UNNAMED
 					</argLine>
+					<useSystemClassLoader>false</useSystemClassLoader>
 				</configuration>
 			</plugin>
 			<plugin>

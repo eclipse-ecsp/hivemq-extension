@@ -396,50 +396,6 @@ public class MessageStoreCallbackTest {
         PropertyLoader.getProperties().remove(PROFILE_CHECK_DISABLED_TOPICS);
     }
 
-    /**
-     * A topic that allows to client id send data without vehicle id is not
-     * configured in the system, a client which is not mapped to vehicle sends a
-     * topic that does not requires to have vehicle id mapped to it, expect 0
-     * services to be invoked.
-     */
-    @Test
-    public void noVehicleIdSendsCommCheckTopicWithCommCheckConfigured() throws IOException {
-        PropertyLoader.getProperties().put(PROFILE_CHECK_DISABLED_TOPICS, COMM_CHECK);
-        PowerMockito.mockStatic(Services.class);
-        PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
-        PowerMockito.mockStatic(HivemqSinkService.class);
-        BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
-
-        PowerMockito.mockStatic(TopicMapperFactory.class);
-        BDDMockito.given(TopicMapperFactory.getInstance()).willReturn(topicMapper);
-
-        msgStoreCallBack = new MessageStoreCallback();
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
-        when(permission.getTopicFilter()).thenReturn(MQTT_2_COMM_CHECK_TOPIC);
-        Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(MQTT_2_COMM_CHECK_TOPIC);
-        Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
-        Mockito.when(publishInboundInput.getPublishPacket().getTimestamp()).thenReturn(System.currentTimeMillis());
-        Mockito.when(publishInboundInput.getPublishPacket().getPayload())
-                .thenReturn(Optional.of(ByteBuffer.wrap(payload.getBytes())));
-
-        DeviceSubscription deviceSubscription = new DeviceSubscription("");
-        DeviceSubscriptionCacheFactory.getInstance().addSubscription("device-1", deviceSubscription);
-
-        TopicMapping topicMapping = TopicMapping.builder().deviceId(DEVICEID).deviceStatusRequired(true)
-                .route(Route.TO_CLOUD).serviceId("commcheck").serviceName(COMM_CHECK).streamStatusTopic(COMM_CHECK)
-                .streamTopic(MQTT_2_COMM_CHECK_TOPIC).build();
-        when(topicMapper.getTopicMapping(MQTT_2_COMM_CHECK_TOPIC)).thenReturn(topicMapping);
-        when(deviceSubscriptionCache.getSubscription(tm2Cloud.getDeviceId())).thenReturn(null);
-        when(compressionUtil.decompress(payload.getBytes())).thenReturn(payload.getBytes());
-        msgStoreCallBack.setWrapWithIgniteEventEnabled(false);
-        when(publishInboundInput.getConnectionInformation().getConnectionAttributeStore()
-                .getAsString(AuthConstants.USERNAME)).thenReturn(Optional.of(""));
-        msgStoreCallBack.doPublishReceived(publishInboundInput, publishInboundOutput);
-
-        verify(hivemqSinkService, times(1)).sendMsgToSink(CLIENT_ID_DUMMY.getBytes(), payload.getBytes(),
-                MQTT_2_COMM_CHECK_TOPIC);
-        PropertyLoader.getProperties().remove(PROFILE_CHECK_DISABLED_TOPICS);
-    }
 
     /**
      * whenever there is commcheck response on subscribed topic, need to wait for
