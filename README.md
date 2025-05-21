@@ -1,7 +1,9 @@
-[<img src="./images/logo.png" width="300" height="150"/>](./images/logo.png)
+<div align="center">
+  <img src="./images/logo.png" width="300" height="150"/>
+</div>
 
 [![Maven Build & Sonar Analysis](https://github.com/eclipse-ecsp/hivemq-extension/actions/workflows/maven-build.yml/badge.svg)](https://github.com/eclipse-ecsp/hivemq-extension/actions/workflows/maven-build.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=eclipse-ecsp_hivemq-extension&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=eclipse-ecsp_hivemq-extension
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=eclipse-ecsp_hivemq-extension&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=eclipse-ecsp_hivemq-extension)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=eclipse-ecsp_hivemq-extension&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=eclipse-ecsp_hivemq-extension)
 [![License Compliance](https://github.com/eclipse-ecsp/hivemq-extension/actions/workflows/licence-compliance.yaml/badge.svg)](https://github.com/eclipse-ecsp/hivemq-extension/actions/workflows/licence-compliance.yaml)
 [![Latest Release](https://img.shields.io/github/v/release/eclipse-ecsp/hivemq-extension?sort=semver)](https://github.com/eclipse-ecsp/hivemq-extension/releases)
@@ -36,7 +38,7 @@ We strongly recommend to read the [HiveMQ Extension Documentation](https://docs.
 * [How to contribute](#how-to-contribute)
 * [Built with Dependencies](#built-with-dependencies)
 * [Code of Conduct](#code-of-conduct)
-* [Contributers](#contributors)
+* [Contributors](#contributors)
 * [Security Contact Information](#security-contact-information)
 * [Support](#support)
 * [Troubleshooting](#troubleshooting)
@@ -53,8 +55,7 @@ The following instructions copy the project and gets it up and running on your l
 1. Download latest hivemq broker from [here](https://github.com/hivemq/hivemq-community-edition).
 2. Run HiveMQ 4.X on Java 11 or later. (The extension is built on Java 17.)
 3. A Kafka Broker must be up and running in local.
-4. The extension uses Redis. By default, Redis communication is disabled but if you enable it using <b>redis.enable=true</b>, then you must download Redis before starting.
-
+4. The extension integrates with Redis. By default, Redis communication is disabled. If you enable it by setting <b>redis.enable=true</b>, make sure Redis is installed and running before starting
 
 ### Installation
 
@@ -95,26 +96,11 @@ profile - RunWithHiveMQ
 
 ### Coding style check configuration
 
-There is a file named **checkStyle.xml** in the project at the root level. Use it to configure checkstyle in your IDE. There are plugins available for all IDEs to run checkstyle.
-<br/>
-For Eclipse IDE, go to marketplace and install the eclipse-cs plugin.
-<br/>
+[checkstyle.xml](./checkstyle.xml) is the coding standard to follow while writing new/updating existing code.
 
-To set **checkStyle.xml** as your default checkstyle follow the following steps in Eclipse. 
-<br/><br/>
-**Windows -> Preferences -> Checkstyle -> New -> Type(select External COnfiguration File)**, Name - give any name, location - browse for checkStyle.xml -> OK
-<br/><br/>
-Select this newly added checkstyle and click on <b>Set as Default</b>
-<br/>
-<br/>
-<b>You can include the checkstyle plugin in pom.xml to generate a checkstyle report.</b>
-<br/>
+Checkstyle plugin [maven-checkstyle-plugin:3.2.1](https://maven.apache.org/plugins/maven-checkstyle-plugin/) is integrated in [pom.xml](./pom.xml) which runs in the validate phase and check goal of the maven lifecycle and fails the build if there are any checkstyle errors in the project.
 
-[checkStyle.xml](./checkStyle.xml) is the HARMAN coding standard to follow while writing new code or updating existing code.
-
-Checkstyle plugin [maven-checkstyle-plugin:3.2.1](https://maven.apache.org/plugins/maven-checkstyle-plugin/) is
-integrated in [pom.xml](./pom.xml) which runs in the `validate` phase and `check` goal of the maven lifecycle. It fails
-the build if there are any checkstyle errors in the project.
+To run checkstyle plugin explicitly, run the following command: mvn checkstyle:check
 
 
 ### Running the tests
@@ -161,26 +147,25 @@ For manual testing, connect using any mqtt client.
   
 ### Deployment
 
-We can deploy this component as a Kubernetes pod by installing Device Message charts.
-[Charts](https://github.com/eclipse-ecsp/csp-opensource-charts/tree/main/hivemq-cluster)
+The component can be deployed as a Kubernetes pod by installing Device factory management charts.
+Link: [Charts](../../../ecsp-helm-charts/tree/main/hivemq-extension-cluster)
 
 ## Usage
 
-You can go through [HiveMQ Extension Documentations](https://docs.hivemq.com/hivemq/latest/extensions/) to learn more about hivemq extensions.
+You can go through [HiveMQ Extension Documentations](https://docs.hivemq.com/hivemq-extension/latest/extensions/) to learn more about hivemq extensions.
 
 
 ## Built With Dependencies
 
-* [Spring Boot](https://spring.io/projects/spring-boot/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [SLF4J](http://www.slf4j.org/) - Logging API
-* [Logback](http://logback.qos.ch/) - Logging Framework
-* ignite Libraries - Internal Harman libraries
-* [Junit](https://junit.org/junit4/) - Test framework
+* [Spring](https://spring.io/projects/spring-framework) - Web framework used for building the application.
+* [Maven](https://maven.apache.org/) - Build tool used for dependency management.
+* [SLF4J](http://www.slf4j.org/) - Logging facade providing abstraction for various logging frameworks.
+* [Logback](http://logback.qos.ch/) - Concrete logging implementation used with SLF4J.
+* [Junit](https://junit.org/) - Unit testing framework.
 * [Hivemq SDK](https://mvnrepository.com/artifact/com.hivemq/hivemq-extension-sdk) - Hivemq sdk to build extension
-* [Kafka](https://kafka.apache.org/) - Apache Kafka 
-* [redis](https://redis.io/) - Redis client
-* [prometheus](https://prometheus.io/) - Monitoring and Alerting toolkit
+* [Kafka](https://kafka.apache.org/) - Distributed event streaming platform used for building real-time data pipelines and streaming applications.
+* [redis](https://redis.io/) - In-memory data store used for caching
+* [prometheus](https://prometheus.io/) - Monitoring and Alerting toolkit for recording real-time metrics and generating alerts
 
 
 ## How to contribute
@@ -194,14 +179,15 @@ See [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) for details about our code of con
 
 ## Contributors
 
-* For a list contributors to this project, see the [contributors](https://github.com/eclipse-ecsp/hivemq/graphs/contributors).
+* The list of [contributors](../../graphs/contributors) who participated in this project.
 
 ## Security Contact Information
 
 See [SECURITY.md](./SECURITY.md) to raise any security related issues.
 
 ## Support
-Contact the project developers via the project's "dev" list.
+
+* Contact the project developers via the project's "dev" list - [ecsp-dev](https://accounts.eclipse.org/mailing-list/)
 
 * https://accounts.eclipse.org/mailing-list/ecsp-dev
 
@@ -215,6 +201,6 @@ This project is licensed under the Apache 2.0 License. See the [LICENSE](./LICEN
 
 ## Announcements
 
-All updates to this component are documented in [releases page](https://github.com/eclipse-ecsp/hivemq/releases).
-For the available versions, see the [tags on this repository](https://github.com/eclipse-ecsp/hivemq/tags).
+All updates to this component are documented in [releases page](https://github.com/eclipse-ecsp/hivemq-extension/releases).
+For the available versions, see the [tags on this repository](https://github.com/eclipse-ecsp/hivemq-extension/tags).
 
