@@ -124,7 +124,6 @@ public class MessageStoreCallbackTest {
         PropertyLoader.reload(path);
     }
 
-    // @InjectMocks
     private MessageStoreCallback msgStoreCallBack;
 
     @Mock
@@ -243,7 +242,6 @@ public class MessageStoreCallbackTest {
         PowerMockito.mockStatic(Services.class);
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
         PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
-        // MockitoAnnotations.initMocks(this);
         msgStoreCallBack = new MessageStoreCallback();
         PropertyLoader.getProperties().put(AuthConstants.QOS_LEVEL_ENABLED, "false");
         PropertyLoader.getProperties().put(PropertyNames.LOG_PER_PDID, false);
@@ -314,7 +312,6 @@ public class MessageStoreCallbackTest {
         PowerMockito.mockStatic(HivemqSinkService.class);
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
         msgStoreCallBack = new MessageStoreCallback();
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
 
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(mqtt2CloudTopic);
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -349,7 +346,6 @@ public class MessageStoreCallbackTest {
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
         PowerMockito.mockStatic(HivemqSinkService.class);
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
         msgStoreCallBack = new MessageStoreCallback();
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(mqtt2CloudTopic);
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -378,7 +374,6 @@ public class MessageStoreCallbackTest {
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
         PowerMockito.mockStatic(HivemqSinkService.class);
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
         msgStoreCallBack = new MessageStoreCallback();
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(mqtt2CloudTopic);
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -410,7 +405,6 @@ public class MessageStoreCallbackTest {
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
         PowerMockito.mockStatic(HivemqSinkService.class);
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
         PowerMockito.mockStatic(TopicMapperFactory.class);
         BDDMockito.given(TopicMapperFactory.getInstance()).willReturn(topicMapper);
         PropertyLoader.getProperties().put(PROFILE_CHECK_DISABLED_TOPICS, COMM_CHECK);
@@ -436,7 +430,6 @@ public class MessageStoreCallbackTest {
                 publishInboundInput.getClientInformation().getClientId().getBytes(), payload.getBytes(),
                 COMM_CHECK_2_DEVICE_TOPIC);
 
-        // assertTrue(HivemqUtils.getClientNKafkaTopicForAck().size() == 1);
         String userName = "device-1";
         TopicMapping topicMapping1 = TopicMapping.builder().deviceId(DEVICEID).deviceStatusRequired(true)
                 .route(Route.TO_CLOUD).serviceId("commcheck").serviceName(COMM_CHECK).streamStatusTopic(COMM_CHECK)
@@ -469,7 +462,6 @@ public class MessageStoreCallbackTest {
         BDDMockito.given(TopicMapperFactory.getInstance()).willReturn(topicMapper);
 
         msgStoreCallBack = new MessageStoreCallback();
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
 
         getTm2CloudFrequencyTest = TopicMapping.builder().deviceId(DEVICEID).deviceStatusRequired(true)
                 .route(Route.TO_CLOUD).serviceId("service-1").serviceName("ro")
@@ -516,7 +508,6 @@ public class MessageStoreCallbackTest {
         BDDMockito.given(TopicMapperFactory.getInstance()).willReturn(topicMapper);
 
         msgStoreCallBack = new MessageStoreCallback();
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
 
         tm2CloudSizeTest = TopicMapping.builder().deviceId(DEVICEID).deviceStatusRequired(true).route(Route.TO_CLOUD)
                 .serviceId("service-1").serviceName("ro").streamStatusTopic(mqtt2CloudTopicSizeTest)
@@ -562,7 +553,6 @@ public class MessageStoreCallbackTest {
         BDDMockito.given(TopicMapperFactory.getInstance()).willReturn(topicMapper);
 
         msgStoreCallBack = new MessageStoreCallback();
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
 
         tm2CloudRlTest = TopicMapping.builder().deviceId(DEVICEID).deviceStatusRequired(true).route(Route.TO_CLOUD)
                 .serviceId("service-1").serviceName("ro").streamStatusTopic(mqtt2CloudTopicRlTest)
@@ -611,7 +601,6 @@ public class MessageStoreCallbackTest {
         BDDMockito.given(TopicMapperFactory.getInstance()).willReturn(topicMapper);
 
         msgStoreCallBack = new MessageStoreCallback();
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
 
         getTm2CloudFrequencyTest = TopicMapping.builder().deviceId(DEVICEID).deviceStatusRequired(true)
                 .route(Route.TO_CLOUD).serviceId("service-1").serviceName("ro")
@@ -652,7 +641,6 @@ public class MessageStoreCallbackTest {
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
         PowerMockito.mockStatic(HivemqSinkService.class);
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
         msgStoreCallBack = new MessageStoreCallback();
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(null);
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -681,7 +669,6 @@ public class MessageStoreCallbackTest {
 
         msgStoreCallBack = new MessageStoreCallback();
 
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
 
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(mqtt2CloudTopic);
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -697,8 +684,6 @@ public class MessageStoreCallbackTest {
         when(transformer.serialize(any(IgniteBlobEvent.class))).thenReturn(payload.getBytes());
 
         when(compressionUtil.decompress(payload.getBytes())).thenReturn(payload.getBytes());
-        // doNothing().when(hivemqSinkService).sendMsgToSink(pdidKey,
-        // bytePayload,"haa-harman-dev-ro");
         msgStoreCallBack.setWrapWithIgniteEventEnabled(true);
         msgStoreCallBack.doPublishReceived(publishInboundInput, publishInboundOutput);
         verify(hivemqSinkService, times(1)).sendMsgToSink(any(byte[].class), any(byte[].class), anyString());
@@ -709,8 +694,6 @@ public class MessageStoreCallbackTest {
      */
     @Test
     public void testOnStoreMessageSuccessForSwap() throws IOException {
-        // byte[] bytePayload =
-        // IngestionSerializerFactory.getInstance().serialize(blobEvent);
         PowerMockito.mockStatic(Services.class);
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
         PowerMockito.mockStatic(HivemqSinkService.class);
@@ -719,15 +702,12 @@ public class MessageStoreCallbackTest {
         PowerMockito.mockStatic(TopicMapperFactory.class);
         BDDMockito.given(TopicMapperFactory.getInstance()).willReturn(topicMapper);
         msgStoreCallBack = new MessageStoreCallback();
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
 
         DeviceSubscription deviceSubscription = new DeviceSubscription(VEHICLEID);
         java.util.Optional<String> deviceType = java.util.Optional.ofNullable("hu");
         deviceSubscription.setDeviceType(deviceType);
         DeviceSubscriptionCacheFactory.getInstance().addSubscription("device-1", deviceSubscription);
 
-        // when(transformer.serialize(any(IgniteBlobEvent.class)))
-        // .thenReturn(IngestionSerializerFactory.getInstance().serialize(blobEvent));
         PropertyLoader.getProperties().put(AuthConstants.DISCONNECT_TOPIC_NAME, "disconnect");
         String clientId = "hu-swap-test-client";
         
@@ -749,9 +729,6 @@ public class MessageStoreCallbackTest {
         when(topicMapper.getTopicMapping(expectedTopic)).thenReturn(tm);
 
         msgStoreCallBack.doPublishReceived(publishInboundInput, publishInboundOutput);
-        // verify(hivemqSinkService, times(0)).sendMsgToSink(pdidKey,
-        // IngestionSerializerFactory.getInstance().serialize(blobEvent),
-        // mqtt2CloudTopic);
         verify(hivemqSinkService, times(0)).sendMsgToSink(any(byte[].class), any(byte[].class), anyString());
         PropertyLoader.getProperties().remove(AuthConstants.DISCONNECT_TOPIC_NAME);
         HivemqServiceProvider.setBlockingClientService(null);
@@ -766,7 +743,6 @@ public class MessageStoreCallbackTest {
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
         PowerMockito.mockStatic(HivemqSinkService.class);
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
         msgStoreCallBack = new MessageStoreCallback();
         msgStoreCallBack.setCompressionUtil(compressionUtil);
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(mqtt2CloudTopic);
@@ -786,18 +762,13 @@ public class MessageStoreCallbackTest {
      */
     @Test
     public void testOnStoreMessageSuccessWithDecompressionDisabled() throws IOException {
-        // byte[] bytePayload =
-        // IngestionSerializerFactory.getInstance().serialize(blobEvent);
         PowerMockito.mockStatic(Services.class);
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
         PowerMockito.mockStatic(HivemqSinkService.class);
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
 
-        // PowerMockito.mockStatic(IngestionSerializerFactory.class);
-        // BDDMockito.given(IngestionSerializerFactory.getInstance()).willReturn(transformer);
         msgStoreCallBack = new MessageStoreCallback();
 
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
 
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(mqtt2CloudTopic);
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -810,14 +781,9 @@ public class MessageStoreCallbackTest {
         deviceSubscription.setDeviceType(deviceType);
         DeviceSubscriptionCacheFactory.getInstance().addSubscription("device-1", deviceSubscription);
 
-        // when(transformer.serialize(any(IgniteBlobEvent.class)))
-        // .thenReturn(IngestionSerializerFactory.getInstance().serialize(blobEvent));
         msgStoreCallBack.setWrapWithIgniteEventEnabled(false);
         msgStoreCallBack.setDecompressionEnabled(false);
         msgStoreCallBack.doPublishReceived(publishInboundInput, publishInboundOutput);
-        // verify(hivemqSinkService, times(1)).sendMsgToSink(pdidKey,
-        // IngestionSerializerFactory.getInstance().serialize(blobEvent),
-        // "haa-harman-dev-ro"/*mqtt2CloudTopic*/);
         verify(hivemqSinkService, times(1)).sendMsgToSink(any(byte[].class), any(byte[].class), anyString());
     }
 
@@ -839,7 +805,6 @@ public class MessageStoreCallbackTest {
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
         PowerMockito.mockStatic(HivemqSinkService.class);
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
         msgStoreCallBack = new MessageStoreCallback();
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(mqtt2CloudTopic);
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -860,7 +825,6 @@ public class MessageStoreCallbackTest {
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
         PowerMockito.mockStatic(HivemqSinkService.class);
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
         msgStoreCallBack = new MessageStoreCallback();
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(mqtt2CloudTopic);
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -891,7 +855,6 @@ public class MessageStoreCallbackTest {
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
         PowerMockito.mockStatic(HivemqSinkService.class);
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
         msgStoreCallBack = new MessageStoreCallback();
         when(permission.getTopicFilter()).thenReturn(mqqt2DeviceTopic);
 
@@ -914,7 +877,7 @@ public class MessageStoreCallbackTest {
      *
      */
     @Test
-    public void testOnStoreMessageDeviceIdEmpty() throws IOException {
+    public void testOnStoreMessageDeviceIdEmpty() {
         PowerMockito.mockStatic(Services.class);
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
         PowerMockito.mockStatic(HivemqSinkService.class);
@@ -924,7 +887,6 @@ public class MessageStoreCallbackTest {
         BDDMockito.given(TopicMapperFactory.getInstance()).willReturn(topicMapper);
         msgStoreCallBack = new MessageStoreCallback();
 
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
 
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(mqtt2CloudTopic);
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -954,7 +916,6 @@ public class MessageStoreCallbackTest {
         BDDMockito.given(TopicMapperFactory.getInstance()).willReturn(topicMapper);
 
         msgStoreCallBack = new MessageStoreCallback();
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
 
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(mqtt2CloudTopic);
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -981,7 +942,6 @@ public class MessageStoreCallbackTest {
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
         PowerMockito.mockStatic(TopicMapperFactory.class);
         BDDMockito.given(TopicMapperFactory.getInstance()).willReturn(topicMapper);
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
         msgStoreCallBack = new MessageStoreCallback();
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(mqtt2CloudTopic);
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -1007,7 +967,6 @@ public class MessageStoreCallbackTest {
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
         PowerMockito.mockStatic(TopicMapperFactory.class);
         BDDMockito.given(TopicMapperFactory.getInstance()).willReturn(topicMapper);
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
         msgStoreCallBack = new MessageStoreCallback();
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(mqtt2CloudTopic);
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -1033,7 +992,6 @@ public class MessageStoreCallbackTest {
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
         PropertyLoader.getProperties().put(AuthConstants.PROFILE_CHECK_DISABLED_TOPICS, "commchk");
         msgStoreCallBack = new MessageStoreCallback();
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(mqtt2CloudTopic);
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
         Mockito.when(publishInboundInput.getPublishPacket().getTimestamp()).thenReturn(System.currentTimeMillis());
@@ -1045,8 +1003,6 @@ public class MessageStoreCallbackTest {
         deviceSubscription.setDeviceType(deviceType);
         DeviceSubscriptionCacheFactory.getInstance().addSubscription(DEVICEID, deviceSubscription);
 
-        // when(deviceSubscriptionCache.getSubscription(DEVICEID)).thenReturn(new
-        // DeviceSubscription(""));
         msgStoreCallBack.doPublishReceived(publishInboundInput, publishInboundOutput);
         verify(hivemqSinkService, times(0)).sendMsgToSink(any(byte[].class), any(byte[].class), anyString());
         DeviceSubscriptionCacheFactory.getInstance().removeSubscription(DEVICEID);
@@ -1093,7 +1049,6 @@ public class MessageStoreCallbackTest {
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
         PowerMockito.mockStatic(HivemqSinkService.class);
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
         msgStoreCallBack = new MessageStoreCallback();
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(mqtt2CloudTopic);
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -1121,7 +1076,6 @@ public class MessageStoreCallbackTest {
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
 
         msgStoreCallBack = new MessageStoreCallback();
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
 
         DeviceSubscription deviceSubscription = new DeviceSubscription(VEHICLEID);
         java.util.Optional<String> deviceType = java.util.Optional.ofNullable("hu");
@@ -1180,7 +1134,6 @@ public class MessageStoreCallbackTest {
     public void testMqttServiceIdMappingNotFound() throws IOException {
         PowerMockito.mockStatic(Services.class);
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
         msgStoreCallBack = new MessageStoreCallback();
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn("haa/harman/dev/dummy/topic");
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -1208,7 +1161,6 @@ public class MessageStoreCallbackTest {
     public void testMqttTopicMappingGlobalTopic() throws IOException, NoSuchFieldException, SecurityException {
         PowerMockito.mockStatic(Services.class);
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn("haa/harman/dev/global/topic");
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
         Mockito.when(publishInboundInput.getPublishPacket().getTimestamp()).thenReturn(System.currentTimeMillis());
@@ -1236,7 +1188,6 @@ public class MessageStoreCallbackTest {
     public void testMqttServiceIdMappingNotProper() throws IOException {
         PowerMockito.mockStatic(Services.class);
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
 
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn("dummy");
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -1262,7 +1213,6 @@ public class MessageStoreCallbackTest {
     public void testMqttKeepAliveTopic() throws IOException {
         PowerMockito.mockStatic(Services.class);
         PowerMockito.when(Services.metricRegistry()).thenReturn(new MetricRegistry());
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
         PropertyLoader.getProperties().put(AuthConstants.KEEP_ALIVE_TOPIC_NAME, "ro");
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn("haa/harman/dev/dummy/2c/ro");
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -1299,14 +1249,10 @@ public class MessageStoreCallbackTest {
         PowerMockito.mockStatic(HivemqSinkService.class);
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
 
-        // PowerMockito.mockStatic(IngestionSerializerFactory.class);
-        // BDDMockito.given(IngestionSerializerFactory.getInstance()).willReturn(transformer);
-
         PowerMockito.mockStatic(TopicMapperFactory.class);
         BDDMockito.given(TopicMapperFactory.getInstance()).willReturn(topicMapper);
         msgStoreCallBack = new MessageStoreCallback();
 
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
 
         DeviceSubscription deviceSubscription = new DeviceSubscription(VEHICLEID);
         java.util.Optional<String> deviceType = java.util.Optional.ofNullable("hu");
@@ -1334,9 +1280,6 @@ public class MessageStoreCallbackTest {
                 .thenReturn(Optional.of(ByteBuffer.wrap(payload.getBytes())));
 
         msgStoreCallBack.doPublishReceived(publishInboundInput, publishInboundOutput);
-        // verify(hivemqSinkService, times(0)).sendMsgToSink(pdidKey,
-        // IngestionSerializerFactory.getInstance().serialize(blobEvent),
-        // mqtt2CloudTopic);
         verify(hivemqSinkService, times(0)).sendMsgToSink(any(byte[].class), any(byte[].class), anyString());
         PropertyLoader.getProperties().remove(AuthConstants.DISCONNECT_TOPIC_NAME);
         HivemqServiceProvider.setBlockingClientService(null);
@@ -1352,13 +1295,10 @@ public class MessageStoreCallbackTest {
         PowerMockito.mockStatic(HivemqSinkService.class);
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
 
-        // PowerMockito.mockStatic(IngestionSerializerFactory.class);
-        // BDDMockito.given(IngestionSerializerFactory.getInstance()).willReturn(transformer);
 
         PowerMockito.mockStatic(TopicMapperFactory.class);
         BDDMockito.given(TopicMapperFactory.getInstance()).willReturn(topicMapper);
         msgStoreCallBack = new MessageStoreCallback();
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
 
         DeviceSubscription deviceSubscription = new DeviceSubscription(VEHICLEID);
         java.util.Optional<String> deviceType = java.util.Optional.ofNullable("hu");
@@ -1385,9 +1325,6 @@ public class MessageStoreCallbackTest {
                 .thenReturn(Optional.of(ByteBuffer.wrap(payload.getBytes())));
 
         msgStoreCallBack.doPublishReceived(publishInboundInput, publishInboundOutput);
-        // verify(hivemqSinkService, times(0)).sendMsgToSink(pdidKey,
-        // IngestionSerializerFactory.getInstance().serialize(blobEvent),
-        // mqtt2CloudTopic);
         verify(hivemqSinkService, times(0)).sendMsgToSink(any(byte[].class), any(byte[].class), anyString());
         PropertyLoader.getProperties().remove(AuthConstants.DISCONNECT_TOPIC_NAME);
         HivemqServiceProvider.setBlockingClientService(null);
@@ -1410,7 +1347,6 @@ public class MessageStoreCallbackTest {
         PropertyLoader.getProperties().put(AuthConstants.QOS_LEVEL_2D_VALUE, "EXACTLY_ONCE");
         PropertyLoader.getProperties().put(AuthConstants.QOS_LEVEL_ENABLED, "true");
         msgStoreCallBack = new MessageStoreCallback();
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
 
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(mqtt2CloudTopic);
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);
@@ -1471,7 +1407,6 @@ public class MessageStoreCallbackTest {
         PowerMockito.mockStatic(HivemqSinkService.class);
         BDDMockito.given(HivemqSinkService.getInstance()).willReturn(hivemqSinkService);
         msgStoreCallBack = new MessageStoreCallback();
-        PowerMockito.when(Services.extensionExecutorService()).thenReturn(new StubManagedExtensionExecutorService());
 
         Mockito.when(publishInboundInput.getPublishPacket().getTopic()).thenReturn(mqtt2CloudTopic);
         Mockito.when(publishInboundInput.getPublishPacket().getQos()).thenReturn(Qos.AT_LEAST_ONCE);

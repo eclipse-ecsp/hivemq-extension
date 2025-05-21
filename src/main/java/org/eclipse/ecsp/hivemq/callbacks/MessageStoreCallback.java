@@ -49,7 +49,6 @@ import org.eclipse.ecsp.hivemq.cache.DeviceSubscriptionCache;
 import org.eclipse.ecsp.hivemq.cache.DeviceSubscriptionCacheFactory;
 import org.eclipse.ecsp.hivemq.d2v.DeviceToVehicleMapper;
 import org.eclipse.ecsp.hivemq.d2v.DeviceToVehicleMapperFactory;
-import org.eclipse.ecsp.hivemq.d2v.VehicleInfo;
 import org.eclipse.ecsp.hivemq.exceptions.IllegalTopicArgumentException;
 import org.eclipse.ecsp.hivemq.exceptions.VehicleProfileResponseNotFoundException;
 import org.eclipse.ecsp.hivemq.kafka.ApplicationConstants;
