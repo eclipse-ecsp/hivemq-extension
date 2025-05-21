@@ -29,7 +29,7 @@ The extension supports the following types of authentication:
 * JWT token authentication
 * Certificate based authentication.
 <br/>
-We strongly recommend to read the [HiveMQ Extension Documentation](https://docs.hivemq.com/hivemq/latest/extensions/) to grasp the core concepts of HiveMQ extension development.
+We strongly recommend to read the [HiveMQ Extension Documentations](https://docs.hivemq.com/hivemq-extension/latest/extensions/) to grasp the core concepts of HiveMQ extension development.
 
 
 # Table of Contents
@@ -188,8 +188,6 @@ See [SECURITY.md](./SECURITY.md) to raise any security related issues.
 ## Support
 
 * Contact the project developers via the project's "dev" list - [ecsp-dev](https://accounts.eclipse.org/mailing-list/)
-
-* https://accounts.eclipse.org/mailing-list/ecsp-dev
 
 ## Troubleshooting
 
