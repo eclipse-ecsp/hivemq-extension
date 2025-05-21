@@ -249,7 +249,7 @@ public class JwtAuthenticationTest {
      * for validateJWTTimeClaims to be false
      */
     @Test
-    public void testJwtTimeClaimsInvalidExpInvalidNbr() throws Exception {
+    public void testJwtTimeClaimsInvalidExpInvalidNbr() {
 
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject("admin")
                 .issuer("https://${PROXY_HOSTNAME}:443/oauth2/token").audience("KU6Sp4fIownMf3RA0yiDk25flYga")

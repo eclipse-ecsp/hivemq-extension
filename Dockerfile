@@ -1,4 +1,4 @@
-FROM tomcat:10.1.40-jdk17
+FROM eclipseecsp/ecsp-base-java17:1.0.0
 
 RUN mkdir /extensions /logback-ext
 RUN apk update && apk add unzip

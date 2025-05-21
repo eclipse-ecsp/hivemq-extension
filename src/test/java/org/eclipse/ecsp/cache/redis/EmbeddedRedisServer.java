@@ -30,8 +30,6 @@
 
 package org.eclipse.ecsp.cache.redis;
 
-import org.eclipse.ecsp.utils.logger.IgniteLogger;
-import org.eclipse.ecsp.utils.logger.IgniteLoggerFactory;
 import org.junit.rules.ExternalResource;
 import redis.embedded.RedisExecProvider;
 import redis.embedded.RedisServer408;
@@ -42,7 +40,6 @@ import redis.embedded.util.OS;
  * This class prepares redis for test cases.
  */
 public class EmbeddedRedisServer extends ExternalResource {
-    private static final IgniteLogger LOGGER = IgniteLoggerFactory.getLogger(EmbeddedRedisServer.class);
     private RedisServer408 redis = null;
     private int port = 0;
     private static final int AVAILABLE_PORT = 6379;

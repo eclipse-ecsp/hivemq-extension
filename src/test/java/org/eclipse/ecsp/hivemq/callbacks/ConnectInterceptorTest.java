@@ -87,7 +87,6 @@ public class ConnectInterceptorTest {
         Mockito.when(clientInformation.getClientId()).thenReturn("haa_api");
         ConnectInterceptor connectInterceptor = new ConnectInterceptor();
         connectInterceptor.onConnect(connectInboundInput, connectInboundOutput);
-        //assertTrue(connectInboundOutput.getConnectPacket().getCleanStart());
         prop.remove(AuthConstants.CLEAN_SESSION);
     }
 
@@ -103,7 +102,6 @@ public class ConnectInterceptorTest {
         Mockito.when(clientInformation.getClientId()).thenReturn("haa_api");
         ConnectInterceptor connectInterceptor = new ConnectInterceptor();
         connectInterceptor.onConnect(connectInboundInput, connectInboundOutput);
-        //assertFalse(connectInboundOutput.getConnectPacket().getCleanStart());
         prop.remove(AuthConstants.CLEAN_SESSION);
     }
 

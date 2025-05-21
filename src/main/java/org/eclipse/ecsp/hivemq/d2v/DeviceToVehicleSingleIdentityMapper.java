@@ -40,7 +40,6 @@ import org.eclipse.ecsp.hivemq.utils.HttpClient;
 import org.eclipse.ecsp.hivemq.utils.VehicleProfileApiClient;
 import org.eclipse.ecsp.utils.logger.IgniteLogger;
 import org.eclipse.ecsp.utils.logger.IgniteLoggerFactory;
-import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;

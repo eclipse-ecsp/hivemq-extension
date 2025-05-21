@@ -37,7 +37,6 @@ import org.eclipse.ecsp.hivemq.auth.constants.AuthConstants;
 import org.eclipse.ecsp.hivemq.base.AbstractAuthentication;
 import org.eclipse.ecsp.hivemq.cache.IgniteAuthInfo;
 import org.eclipse.ecsp.hivemq.utils.HivemqUtils;
-import org.eclipse.ecsp.hivemq.utils.PropertyLoader;
 import org.eclipse.ecsp.utils.logger.IgniteLogger;
 import org.eclipse.ecsp.utils.logger.IgniteLoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
