@@ -67,7 +67,7 @@ The following is a step-by-step series of examples that gets a local development
 		
 ```
 hivemq broker path in pom.xml, path where you have download hivemq broker.
-<hiveMQDir>/opt/hivemq-ce-2024.4/</hiveMQDir>
+<hiveMQDir>/opt/hivemq/</hiveMQDir>
 
 update kafka broker url to localhost or ipaddress where kafka is running
 kafka.broker.url=localhost:9092
