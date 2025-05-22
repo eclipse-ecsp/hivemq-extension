@@ -2,14 +2,14 @@
   <img src="./images/logo.png" width="300" height="150"/>
 </div>
 
+# HiveMQ Custom Extension
+
 [![Maven Build & Sonar Analysis](https://github.com/eclipse-ecsp/hivemq-extension/actions/workflows/maven-build.yml/badge.svg)](https://github.com/eclipse-ecsp/hivemq-extension/actions/workflows/maven-build.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=eclipse-ecsp_hivemq-extension&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=eclipse-ecsp_hivemq-extension)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=eclipse-ecsp_hivemq-extension&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=eclipse-ecsp_hivemq-extension)
 [![License Compliance](https://github.com/eclipse-ecsp/hivemq-extension/actions/workflows/licence-compliance.yaml/badge.svg)](https://github.com/eclipse-ecsp/hivemq-extension/actions/workflows/licence-compliance.yaml)
 [![Latest Release](https://img.shields.io/github/v/release/eclipse-ecsp/hivemq-extension?sort=semver)](https://github.com/eclipse-ecsp/hivemq-extension/releases)
 
-
-# HiveMQ Custom Extension
 The HiveMQ custom extension provides functionality to authenticate the MQTT client, provides default permissions on configured topics, subscribe, publish, and so on. This extension supports HiveMQ 4.X.
 
 The following HiveMQ interceptors are implemented:
@@ -28,7 +28,7 @@ The extension supports the following types of authentication:
 * Username/password authentication
 * JWT token authentication
 * Certificate based authentication.
-<br/>
+
 We strongly recommend to read the [HiveMQ Extension Documentations](https://docs.hivemq.com/hivemq-extension/latest/extensions/) to grasp the core concepts of HiveMQ extension development.
 
 
@@ -53,7 +53,7 @@ The following instructions copy the project and gets it up and running on your l
 ### Prerequisites
 
 1. Download latest hivemq broker from [here](https://github.com/hivemq/hivemq-community-edition).
-2. Run HiveMQ 4.X on Java 11 or later. (The extension is built on Java 17.)
+2. Run HiveMQ 4.x on Java 11 or later. (The extension is built on Java 17.)
 3. A Kafka Broker must be up and running in local.
 4. The extension integrates with Redis. By default, Redis communication is disabled. If you enable it by setting <b>redis.enable=true</b>, make sure Redis is installed and running before starting
 
