@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.ecsp</groupId>
 	<artifactId>hivemq-extension</artifactId>
-	<version>0.3.0</version>
+	<version>1.0.0</version>
 
 	<name>Hivemq Extension</name>
 	<description>Hivemq extension library for ECSP project</description>
@@ -48,6 +48,7 @@
 	</organization>
 
 	<properties>
+		<extension.name>HiveMQ Extension</extension.name>
 		<jacoco-maven-plugin.version>0.8.13</jacoco-maven-plugin.version>
         <maven-clean-plugin.version>3.4.1</maven-clean-plugin.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
