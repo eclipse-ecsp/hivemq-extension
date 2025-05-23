@@ -79,7 +79,7 @@ In PropertyLoader.java update folder path for hivemq-plugin-base.properties file
 private static String folderPath = "<folderPath>//src//test//resources//";
 
 provide full path for below property in hivemq-plugin-base.properties
-jwt.publickey.path=<folderPath>/src/test/resources/wso_test_publickey.txt
+jwt.publickey.path=<folderPath>/src/test/resources/Test-public-key.txt
 
 ```
 
