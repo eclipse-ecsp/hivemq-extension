@@ -153,19 +153,8 @@
 		<maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
 		<license-tool-plugin.version>1.1.0</license-tool-plugin.version>
 		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
-		<nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+		<central-publishing-maven-plugin.version>0.7.0</central-publishing-maven-plugin.version>
 	</properties>
-
-	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement>
 
 	<pluginRepositories>
 		<pluginRepository>
@@ -870,7 +859,6 @@
 				<skipGpgSign>true</skipGpgSign>
 				<skipJavadocs>false</skipJavadocs>
 				<skipSource>false</skipSource>
-				<skipNexusStaging>true</skipNexusStaging>
 				<autoReleaseAfterClose>false</autoReleaseAfterClose>
 			</properties>
 		</profile>
@@ -884,7 +872,6 @@
 				<skipGpgSign>true</skipGpgSign>
 				<skipJavadocs>true</skipJavadocs>
 				<skipSource>true</skipSource>
-				<skipNexusStaging>true</skipNexusStaging>
 				<autoReleaseAfterClose>false</autoReleaseAfterClose>
 			</properties>
 		</profile>
@@ -896,30 +883,21 @@
 				<skipGpgSign>false</skipGpgSign>
 				<skipJavadocs>false</skipJavadocs>
 				<skipSource>false</skipSource>
-				<skipNexusStaging>false</skipNexusStaging>
 				<autoReleaseAfterClose>true</autoReleaseAfterClose>
 			</properties>
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>ossrh</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-                </snapshotRepository>
-                <repository>
-                    <id>ossrh</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-                </repository>
-            </distributionManagement>
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>${nexus-staging-maven-plugin.version}</version>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>${central-publishing-maven-plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                            <publishingServerId>central</publishingServerId>
+                            <autoPublish>true</autoPublish>
+                            <waitUntil>published</waitUntil>
+                            <centralSnapshotsUrl>https://central.sonatype.com/repository/maven-snapshots/</centralSnapshotsUrl>
+                        <skipPublishing>false</skipPublishing>
                         </configuration>
                     </plugin>
                     <plugin>
